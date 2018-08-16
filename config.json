@@ -1,6 +1,6 @@
 {
-  "name": "Cornerstone",
-  "version": "2.3.0-rc.2",
+  "name": "AnnaTest",
+  "version": "100",
   "meta": {
     "price": 0,
     "documentation_url": "https://support.bigcommerce.com/articles/Public/Cornerstone-Theme-Manual",
@@ -30,7 +30,8 @@
       "one_page_check_out",
       "product_videos",
       "google_amp",
-      "customized_checkout"
+      "customized_checkout",
+      "account_payment_methods"
     ]
   },
   "css_compiler": "scss",

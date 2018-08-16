@@ -1,0 +1,65 @@
+{{#unless customer.payment_methods}}
+    {{> components/common/alert-info (lang 'account.payment_methods.no_methods')}}
+{{/unless}}
+
+<ul class="paymentMethodList">
+    {{#each payment_methods}}
+    <li class="paymentMethod">
+        <div class="panel panel--paymentMethod">
+            <div class="panel-title">
+                <span>
+                    <svg class="footer-payment-icon">
+                    {{#if brand '===' 'visa'}}
+                        <use xlink:href="#icon-logo-visa"></use>
+                    {{/if}}
+                    {{#if brand '===' 'american_express'}}
+                        <use xlink:href="#icon-logo-american-express"></use>
+                    {{/if}}
+                    {{#if brand '===' 'mastercard'}}
+                        <use xlink:href="#icon-logo-mastercard"></use>
+                    {{/if}}
+                    {{#if brand '===' 'discover'}}
+                        <use xlink:href="#icon-logo-discover"></use>
+                    {{/if}}
+                    </svg>
+                </span>
+                <span>
+                    <h5 class="paymentMethod-title">
+                        {{lang 'account.payment_methods.card_ending_in' brand=brand last_four=last_4}}
+                    </h5>
+                </span>
+                <span>
+                    <h5 class="paymentMethod-title">
+                        {{lang 'account.payment_methods.card_expiry' month=expiry_month year=expiry_year}}
+                    </h5>
+                </span>
+            </div>
+            <div class="panel-body">
+                <h5 class="paymentMethod-title">{{billing_address.first_name}} {{billing_address.last_name}}</h5>
+                <ul class="paymentMethod-details paymentMethod-details--postal">
+                    <li>{{billing_address.address_line_1}}</li>
+                    <li>{{billing_address.address_line_2}}</li>
+                    <li>{{billing_address.city}} {{billing_address.state}} {{billing_address.postal_code}}</li>
+                    <li>{{billing_address.country_name}}</li>
+                </ul>
+                <form action="{{delete_url}}" method="post" data-delete-payment-method="{{lang 'forms.payment_methods.confirm_delete'}}">
+                    <div class="form-actions">
+                        <a class="button button--primary button--small" href="{{edit_url}}">{{lang 'common.edit' }}</a>
+                        <button type="submit" class="button secondary button--small">{{lang 'common.delete' }}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+    <li class="paymentMethod">
+        <a class="panel panel--paymentMethod panel--newPaymentMethod" href="{{urls.account.add_payment_method}}">
+            <span class="panel-body">
+                <span class="paymentMethod-addNew">
+                    <span class="paymentMethod-symbol">&plus;</span>
+                    <h5 class="paymentMethod-title">{{lang 'account.payment_methods.new_payment_method' }}</h5>
+                </span>
+            </span>
+        </a>
+    </li>
+</ul>

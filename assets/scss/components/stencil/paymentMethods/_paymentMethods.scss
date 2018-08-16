@@ -1,0 +1,159 @@
+// =============================================================================
+// PAYMENT METHODS (CSS)
+// =============================================================================
+
+// Payment Methods layout
+// -----------------------------------------------------------------------------
+//
+// 1. Using display: inline-block; to vertically align blocks.
+//    Font-size gets redefined under the .paymentMethod block.
+//
+// -----------------------------------------------------------------------------
+
+.paymentMethodList {
+    font-size: 0; // 1
+    list-style: none;
+    margin-left: -(spacing("half"));
+    margin-right: -(spacing("half"));
+}
+
+.paymentMethod {
+    display: inline-block;
+    padding: 0 spacing("half");
+    vertical-align: top;
+    width: 100%;
+
+    @include breakpoint("small") {
+        width: grid-calc(8, $total-columns);
+    }
+
+    @include breakpoint("large") {
+        width: grid-calc(6, $total-columns);
+    }
+}
+
+
+// Payment Method
+// -----------------------------------------------------------------------------
+//
+// 1. Redefine the font-size as we're removing white-space on the parent by
+//    reducing the size to 0.
+// 2. Adding a min-height to improve the consistency of the payment method blocks.
+// 3. On larger screens we position: absolute; the .form-actions so they're
+//    consistently in line. We need to adjust padding to accommodate this.
+//
+// -----------------------------------------------------------------------------
+
+.panel--paymentMethod {
+    font-size: fontSize("base"); // 1
+    position: relative;
+
+    .panel-title {
+        padding: spacing("single");
+        background-color: transparent;
+        border: container("border");
+        display: block;
+    }
+
+    .panel-body {
+        min-height: remCalc(200px); // 2
+        padding: spacing("single");
+
+        @include breakpoint("small") {
+            padding: spacing("single") spacing("single") (spacing("single") + spacing("double")); // 3
+        }
+    }
+
+    .form-actions {
+        margin-bottom: -(spacing("half"));
+        margin-top: spacing("single");
+        text-align: left;
+
+        @include breakpoint("small") { // 3
+            bottom: spacing("single");
+            position: absolute;
+            width: auto;
+        }
+
+        // scss-lint:disable SelectorDepth, NestingDepth
+        .button {
+            margin-bottom: spacing("half");
+
+            + .button {
+                margin-left: 0;
+                margin-top: 0;
+
+                @include breakpoint("small") {
+                    margin-left: spacing("quarter");
+                }
+            }
+        }
+        // scss-lint:enable SelectorDepth, NestingDepth
+    }
+}
+
+.paymentMethod-title {
+    margin: 0 0 spacing("half");
+    text-transform: none;
+    display: inline-block;
+    font-weight: bold;
+}
+
+.paymentMethod-details {
+    list-style: none;
+    margin: 0 0 spacing("half");
+}
+
+.paymentMethod-details--postal {
+    font-size: fontSize("smaller");
+}
+
+.paymentMethod-label,
+.paymentMethod-description {
+    display: inline-block;
+    font-size: fontSize("base");
+    margin: 0;
+}
+
+.paymentMethod-label {
+    color: stencilColor("color-textSecondary");
+    font-weight: fontWeight("normal");
+}
+
+.panel--newPaymentMethod {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+
+        // scss-lint:disable SelectorDepth, NestingDepth
+        .paymentMethod-title {
+            color: stencilColor("color-textLink--hover");
+        }
+        // scss-lint:enable SelectorDepth, NestingDepth
+    }
+
+    .panel-body {
+        background-color: transparent;
+        border: container("border");
+        display: block;
+    }
+
+    .paymentMethod-title {
+        margin-bottom: 0;
+        transition: all 0.15s ease;
+    }
+}
+
+.paymentMethod-addNew {
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateX(-50%) translateY(-55%);
+}
+
+.paymentMethod-symbol {
+    font-size: fontSize("hero");
+    line-height: 1;
+}
